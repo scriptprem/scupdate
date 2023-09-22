@@ -1,6 +1,4 @@
 ### AUTOSCRIPT
-```
-```
 • HUBUNGI:
 - Telegram: [Klik Disini](https://t.me/RVPNSTORES)
 
