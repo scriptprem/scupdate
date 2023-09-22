@@ -1,9 +1,8 @@
 ### AUTOSCRIPT
 ```
-SC TUNELL LIFETIME BY ARI VPN STORE
 ```
 • HUBUNGI:
-- Telegram: [Klik Disini](https://t.me/ARI_VPN_STORE)
+- Telegram: [Klik Disini](https://t.me/RVPNSTORES)
 
 ### PERHATIAN
 
