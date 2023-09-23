@@ -521,7 +521,7 @@ function finish(){
 <code>USER      : </code><code>${NAMES}</code>
 <code>RAM       : </code><code>${RAMMS}MB</code>
 <code>LINUX     : </code><code>${OS}</code>
-🔰@ARI_VPN_STORE
+🔰@RVPNSTORES
 "
     curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
     cp /etc/openvpn/*.ovpn /var/www/html/
