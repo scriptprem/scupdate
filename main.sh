@@ -46,14 +46,6 @@ clear
 clear && clear && clear
 clear;clear;clear
 
-  # // Banner
-echo -e "${YELLOW}----------------------------------------------------------${NC}"
-echo -e "  Welcome To RVPN Project Script Installer ${YELLOW}(${NC}${green} Stable Edition ${NC}${YELLOW})${NC}"
-echo -e "     This Will Quick Setup VPN Server On Your Server"
-echo -e "         Auther : ${green} RVPN STORES${NC}${YELLOW}(${NC} ${green}Geo Project ${NC}${YELLOW})${NC}"
-echo -e "       © Recode By Geo Project ${YELLOW}(${NC} 2023 ${YELLOW})${NC}"
-echo -e "${YELLOW}----------------------------------------------------------${NC}"
-echo ""
 # // Checking Os Architecture
 echo -e "
     ┌───────────────────────────────────────────────┐
@@ -61,7 +53,7 @@ echo -e "
  ───│    $Green┌─┐┬ ┬┌┬┐┌─┐┌─┐┌─┐┬─┐┬┌─┐┌┬┐  ┬  ┬┌┬┐┌─┐$NC   │───
  ───│    $Green├─┤│ │ │ │ │└─┐│  ├┬┘│├─┘ │   │  │ │ ├┤ $NC   │───
  ───│    $Green┴ ┴└─┘ ┴ └─┘└─┘└─┘┴└─┴┴   ┴   ┴─┘┴ ┴ └─┘$NC   │───
-    │    ${YELLOW}Copyright${FONT} (C)$GRAY https://github.com/rizkyckj$NC     │
+    │    ${YELLOW}Copyright${FONT} (C)$GRAY https://github.com/rizkyckj$NC  │
     └───────────────────────────────────────────────┘
          ${RED}Autoscript xray vpn lite (multi port)${FONT}    
 ${RED}Make sure the internet is smooth when installing the script${FONT}
