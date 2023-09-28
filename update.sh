@@ -15,7 +15,7 @@ NC="\E[0m"
 clear
 clear && clear && clear
 clear;clear;clear
-sleep 3
+sleep 2
 # // Checking Os Architecture
 echo -e "
     ┌───────────────────────────────────────────────┐
