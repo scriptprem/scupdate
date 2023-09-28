@@ -10,11 +10,12 @@ BG="\E[44;1;39m"
 
 NC="\E[0m"
 
+
 # // Clear Data
 clear
 clear && clear && clear
 clear;clear;clear
-
+sleep 3
 # // Checking Os Architecture
 echo -e "
     ┌───────────────────────────────────────────────┐
