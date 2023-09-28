@@ -22,11 +22,11 @@ echo -e "    •> Install UDP Server <•" | lolcat
 
 echo -e "      •> Fix Bug Script <•" | lolcat
 
-echo -e "     •> Script By @YuiVPN <•" | lolcat
+echo -e "     •> Script By @RVPN <•" | lolcat
 
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 
-echo -e "  ${BG} >>> THANKS TO YUI VPN <<< ${NC}" 
+echo -e "  ${BG} >>> THANKS TO RVPN <<< ${NC}" 
 
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 
