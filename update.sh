@@ -22,7 +22,7 @@ echo -e "    •> Install UDP Server <•" | lolcat
 
 echo -e "      •> Fix Bug Script <•" | lolcat
 
-echo -e "     •> Script By @ARI_VPN_STORES <•" | lolcat
+echo -e "     •> Script By @RVPN STORES <•" | lolcat
 
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 
