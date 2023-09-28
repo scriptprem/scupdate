@@ -3,7 +3,7 @@ clear
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 ###########- COLOR CODE -##############
-REPO="https://raw.githubusercontent.com/rizkyckj/scupdate/main/"
+REPO="https://raw.githubusercontent.com/YuiVPN/scupdate/main/"
 CYAN='\033[0;96m'        # Cyan
 
 BG="\E[44;1;39m"
@@ -22,11 +22,11 @@ echo -e "    •> Install UDP Server <•" | lolcat
 
 echo -e "      •> Fix Bug Script <•" | lolcat
 
-echo -e "     •> Script By @RVPN STORES <•" | lolcat
+echo -e "     •> Script By @YuiVPN <•" | lolcat
 
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 
-echo -e "  ${BG} >>> THANKS TO RVPN STORES <<< ${NC}" 
+echo -e "  ${BG} >>> THANKS TO YUI VPN <<< ${NC}" 
 
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 
