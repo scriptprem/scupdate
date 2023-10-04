@@ -29,7 +29,7 @@ RAMMS=$(free -m | awk 'NR==2 {print $2}')
 KEY="6404993567:AAFSJpLEuKHmEmg4MfoD0qME9Dh4Ijz6Ock"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 REPO="https://raw.githubusercontent.com/rizkyckj/scupdate/main/"
-CDNF="https://raw.githubusercontent.com/rizkyckj/scupdate/main"
+CDNF="https://raw.githubusercontent.com/rizkyckj/scupdate/main/"
 APT="apt-get -y install "
 domain=$(cat /root/domain)
 start=$(date +%s)
@@ -279,14 +279,21 @@ function download_config(){
     chmod 644 /etc/default/dropbear
     wget -q -O /etc/banner "${REPO}config/banner" >/dev/null 2>&1
     
-    # > Add menu, thanks to Bhoikfost Yahya <3
-    wget -O /tmp/menu-master.zip "${REPO}config/menu.zip" >/dev/null 2>&1
-    mkdir /tmp/menu
-    7z e  /tmp/menu-master.zip -o/tmp/menu/ >/dev/null 2>&1
-    chmod +x /tmp/menu/*
-    mv /tmp/menu/* /usr/sbin/
+    #Instal Menu
+function menu(){
+    clear
+    print_install "Memasang Menu Packet"
+    wget ${REPO}menu/menu.zip
+    unzip menu.zip
+    chmod +x menu/*
+    mv menu/* /usr/local/sbin
+    rm -rf menu
+    rm -rf menu.zip
+}
 
-
+# Membaut Default Menu 
+function profile(){
+clear
     cat >/root/.profile <<EOF
 # ~/.profile: executed by Bourne-compatible login shells.
 if [ "$BASH" ]; then
@@ -295,7 +302,7 @@ if [ "$BASH" ]; then
     fi
 fi
 mesg n || true
-uwu
+menu
 EOF
 
 chmod 644 /root/.profile
