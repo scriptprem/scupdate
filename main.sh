@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ### Color
 Green="\e[92;1m"
 RED="\033[31m"
@@ -19,17 +20,17 @@ TANGGAL=$(date '+%Y-%m-%d')
 TIMES="10"
 NAMES=$(whoami)
 IMP="wget -q -O"    
-CHATID=""
+CHATID="5879214876"
 LOCAL_DATE="/usr/bin/"
 MYIP=$(wget -qO- ipinfo.io/ip)
 ISP=$(wget -qO- ipinfo.io/org)
 CITY=$(curl -s ipinfo.io/city)
 TIME=$(date +'%Y-%m-%d %H:%M:%S')
 RAMMS=$(free -m | awk 'NR==2 {print $2}')
-KEY="5892284613:AAGOTY9ePR8KcSIgWPFFftbVuVNelb4fOuc"
+KEY="6688852810:AAEKijkqZeqwO0pfkWqkYUM4RJq9myw30ZQ"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
-REPO="https://raw.githubusercontent.com/rizkyckj/scupdate/main/"
-CDNF="https://raw.githubusercontent.com/rizkyckj/scupdate/main"
+REPO="https://raw.githubusercontent.com/rizkyckj/GT/rvpn/"
+CDNF="https://raw.githubusercontent.com/rizkyckj/GT/rvpn"
 APT="apt-get -y install "
 domain=$(cat /root/domain)
 start=$(date +%s)
@@ -298,12 +299,19 @@ mesg n || true
 uwu
 EOF
 
-chmod 644 /root/.profile
+cat >/etc/cron.d/daily_reboot <<EOF
+SHELL=/sbin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+0 5 * * * root /sbin/reboot
+EOF
 
-echo "0 0 * * * root xp" >/etc/crontab
-echo "*/1 * * * * root clearlog" >/etc/crontab
-echo "0 0 * * * root reboot" >/etc/crontab
+echo "*/30 0 * * * root /usr/sbin/xp" >/etc/cron.d/xp_all
+echo "*/10 * * * * root /usr/sbin/clearlog" >/etc/cron.d/clearlog_all
+echo "*/10 * * * * root service cron restart" >/etc/cron.d/restart_cron
 service cron restart
+cat >/home/daily_reboot <<EOF
+5
+EOF
 
 cat >/etc/systemd/system/rc-local.service <<EOF
 [Unit]
@@ -379,9 +387,9 @@ account default
 host smtp.gmail.com
 port 587
 auth on
-user dikitubis9@gmail.com
-from dikitubis9@gmail.com
-password rizki12345
+user candravpnz@gmail.com
+from candravpnz@gmail.com
+password Candra230303
 logfile ~/.msmtp.log
 EOF
 
@@ -471,7 +479,7 @@ function install_all() {
 
 function finish(){
     TEXT="
-<u>🌀INFO INSTALL SC🌀</u>
+<u>INFORMATION VPS INSTALL SC</u>
 <code>TIME      : </code><code>${TIME}</code>
 <code>IPVPS     : </code><code>${MYIP}</code>
 <code>DOMAIN    : </code><code>${domain}</code>
@@ -480,7 +488,6 @@ function finish(){
 <code>USER      : </code><code>${NAMES}</code>
 <code>RAM       : </code><code>${RAMMS}MB</code>
 <code>LINUX     : </code><code>${OS}</code>
-🔰@JurigVpnGrup
 "
     curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
     cp /etc/openvpn/*.ovpn /var/www/html/
@@ -523,7 +530,6 @@ function finish(){
     echo "    │                                                     │"
     echo "    │      >>> Server Information & Other Features        │"
     echo "    │   - Timezone                : Asia/Jakarta (GMT +7) │"
-    echo "    │   - Autoreboot On    : $AUTOREB:00 $TIME_DATE GMT +7│"
     echo "    │   - Auto Delete Expired Account  : per 23:30        │"
     echo "    │   - FAuto Clear Log.   : Per 30 Menit               │"
     echo "    │   - Fully automatic script                          │"
@@ -550,7 +556,6 @@ first_setup
 dir_xray
 add_domain
 install_all
-finish  
 
 #rm ~/.bash_history
 sleep 10
