@@ -1,18 +1,4 @@
 #!/bin/bash
-LOGO
-clear
-echo "# //===================================================="
-echo "# //	System Request:Debian 9+/Ubuntu 18.04+/20.04"
-echo "# //	Author:	bhoikfostyahya"
-echo "# //	recode:	Effata"
-echo "# //	Dscription: Xray Menu Management"
-echo "# //	email: admin@bhoikfostyahya.com"
-echo "# //      telegram: https://t.me/CRSe7en2nd"
-echo "# //===================================================="
-sleep 3
-
-#@ft
-
 ### Color
 Green="\e[92;1m"
 RED="\033[31m"
@@ -27,29 +13,23 @@ GRAY="\e[1;30m"
 NC='\e[0m'
 red='\e[1;31m'
 green='\e[0;32m'
-clear
-echo -e "${RED}JANGAN INSTALL SCRIPT INI MENGGUNAKAN KONEKSI VPN!!!${FONT}"
-echo -e ""
-echo -e "${Green}DNS POINTING${FONT}(DNS-resolved IP address of the domain)"
-echo -e "${Green}Menuju Proses Penginstalan Dalam 8 Detik Lagi !!!"
-echo ""
-sleep 8
+
 ### System Information
 TANGGAL=$(date '+%Y-%m-%d')
 TIMES="10"
 NAMES=$(whoami)
 IMP="wget -q -O"    
-CHATID=""
+CHATID="5667901146"
 LOCAL_DATE="/usr/bin/"
 MYIP=$(wget -qO- ipinfo.io/ip)
 ISP=$(wget -qO- ipinfo.io/org)
 CITY=$(curl -s ipinfo.io/city)
 TIME=$(date +'%Y-%m-%d %H:%M:%S')
 RAMMS=$(free -m | awk 'NR==2 {print $2}')
-KEY="6185858678:AAHkqy9ryXeJ8axx6ZgwuBxGX1Nu-hRoQZk"
+KEY="6404993567:AAFSJpLEuKHmEmg4MfoD0qME9Dh4Ijz6Ock"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
-REPO="https://raw.githubusercontent.com/rizkyckj/GT/rvpn/"
-CDNF="https://raw.githubusercontent.com/effatastore/effata/ipsc"
+REPO="https://raw.githubusercontent.com/rizkyckj/scupdate/main/"
+CDNF="https://raw.githubusercontent.com/rizkyckj/scupdate/main"
 APT="apt-get -y install "
 domain=$(cat /root/domain)
 start=$(date +%s)
@@ -120,9 +100,9 @@ function base_package() {
     msmtp-mta ca-certificates bsd-mailx iptables iptables-persistent netfilter-persistent \
     net-tools  jq openvpn easy-rsa python3-certbot-nginx p7zip-full tuned fail2ban -y
     apt-get clean all; sudo apt-get autoremove -y
-    apt-get install vnstat -y
     apt-get install lolcat -y
-    apt-get install lsof -y
+    apt-get install vnstat -y
+    apt-get install cron -y
     gem install lolcat
     print_ok "Berhasil memasang paket yang dibutuhkan"
 }
@@ -131,13 +111,13 @@ clear
 ### Buat direktori xray
 function dir_xray() {
     print_install "Membuat direktori xray"
-    mkdir -p /etc/{xray,vmess,websocket,vless,trojan,shadowsocks}
+    mkdir -p /etc/{xray,vmess,websocket,vless,trojan,shadowsocks,bot}
     # mkdir -p /usr/sbin/xray/
     mkdir -p /root/.install.log
     mkdir -p /var/log/xray/
     mkdir -p /var/www/html/
-    mkdir -p /etc/myridwan/
-#    chmod +x /var/log/xray
+    mkdir -p /etc/rizkihdyt/
+    # chmod +x /var/log/xray
     touch /var/log/xray/{access.log,error.log}
     chmod 777 /var/log/xray/*.log
     touch /etc/vmess/.vmess.db
@@ -145,22 +125,22 @@ function dir_xray() {
     touch /etc/trojan/.trojan.db
     touch /etc/ssh/.ssh.db
     touch /etc/shadowsocks/.shadowsocks.db
+    touch /etc/bot/.bot.db
     clear
 }
 
 ### Tambah domain
 function add_domain() {
-    LOGO
+    echo "`cat /etc/banner`" | lolcat
     echo -e "${red}    ♦️${NC} ${green} CUSTOM SETUP DOMAIN VPS     ${NC}"
     echo -e "${red}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
     echo "1. Use Domain From Script / Gunakan Domain Dari Script"
-    echo "2. Choose Your Own Domain / Pilih Domain Sendiri"
+    echo "2. Choose Your Own Domain / Pilih Domain Sendiri (recommended)"
     echo -e "${red}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
     read -rp "Choose Your Domain Installation : " dom 
 
     if test $dom -eq 1; then
     clear
-    apt install jq curl -y
     wget -q -O /root/cf "${CDNF}/cf" >/dev/null 2>&1
     chmod +x /root/cf
     bash /root/cf | tee /root/install.log
@@ -205,7 +185,7 @@ function install_xray(){
     xray_latest="$(curl -s https://api.github.com/repos/dharak36/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
     xraycore_link="https://github.com/dharak36/Xray-core/releases/download/v$xray_latest/xray.linux.64bit"
     curl -sL "$xraycore_link" -o xray
-#    unzip -q xray.zip && rm -rf xray.zip
+    # > unzip -q xray.zip && rm -rf xray.zip
     mv xray /usr/sbin/xray
     print_success "Xray Core"
     
@@ -284,7 +264,7 @@ function download_config(){
     wget -O /etc/nginx/conf.d/geostore.conf "${REPO}config/geovpn.conf" >/dev/null 2>&1
     sed -i "s/xxx/${domain}/g" /etc/nginx/conf.d/geostore.conf
     wget -O /etc/nginx/nginx.conf "${REPO}config/nginx.conf" >/dev/null 2>&1
-    # curl "${REPO}caddy/install.sh" | bash 
+    # > curl "${REPO}caddy/install.sh" | bash 
     wget -q -O /etc/squid/squid.conf "${REPO}config/squid.conf" >/dev/null 2>&1
     echo "visible_hostname $(cat /etc/xray/domain)" /etc/squid/squid.conf
     mkdir -p /var/log/squid/cache/
@@ -315,29 +295,15 @@ if [ "$BASH" ]; then
     fi
 fi
 mesg n || true
-menu
-EOF
-
-cat >/etc/cron.d/xp_all <<EOF
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-*/30 23 * * * root /usr/bin/xp
+uwu
 EOF
 
 chmod 644 /root/.profile
 
-cat >/etc/cron.d/daily_reboot <<EOF
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-0 5 * * * root /sbin/reboot
-EOF
-
-echo "*/1 * * * * root echo -n > /var/log/nginx/access.log" >/etc/cron.d/log.nginx
-echo "*/1 * * * * root echo -n > /var/log/xray/access.log" >>/etc/cron.d/log.xray
+echo "0 0 * * * root xp" >/etc/crontab
+echo "*/1 * * * * root clearlog" >/etc/crontab
+echo "0 0 * * * root reboot" >/etc/crontab
 service cron restart
-cat >/home/daily_reboot <<EOF
-5
-EOF
 
 cat >/etc/systemd/system/rc-local.service <<EOF
 [Unit]
@@ -413,9 +379,9 @@ account default
 host smtp.gmail.com
 port 587
 auth on
-user taibabihutan17@gmail.com
-from taibabihutan17@gmail.com
-password romanisti
+user dikitubis9@gmail.com
+from dikitubis9@gmail.com
+password rizki12345
 logfile ~/.msmtp.log
 EOF
 
@@ -440,9 +406,24 @@ touch /root/.install.log
 cat >/root/tmp <<-END
 #!/bin/bash
 #vps
-### Geostoretunnel $TANGGAL $MYIP
+### ARI VPN STORES $TANGGAL $MYIP
 END
 ####
+RIZKIHDYTPROJECT() {
+    data=($(cat /root/tmp | grep -E "^### " | awk '{print $2}'))
+    for user in "${data[@]}"; do
+        exp=($(grep -E "^### $user" "/root/tmp" | awk '{print $3}'))
+        d1=($(date -d "$exp" +%s))
+        d2=($(date -d "$Date_list" +%s))
+        exp2=$(((d1 - d2) / 86400))
+        if [[ "$exp2" -le "0" ]]; then
+            echo $user >/etc/.$user.ini
+        else
+            rm -f /etc/.$user.ini
+        fi
+    done
+    rm -f /root/tmp
+}
 
 function enable_services(){
     print_install "Restart servis"
@@ -469,9 +450,50 @@ echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 
 # Ganti Banner
-wget -O /etc/issue.net "${REPO}issue.net"
+wget -O /etc/issue.net "${REPO}/issue.net"
 
 sleep 4
+}
+
+function ins_epro(){
+clear
+print_install "Menginstall ePro WebSocket Proxy"
+    wget -O /usr/bin/ws "${REPO}ws/ws" >/dev/null 2>&1
+    wget -O /usr/bin/tun.conf "${REPO}ws/tun.conf" >/dev/null 2>&1
+    wget -O /etc/systemd/system/ws.service "${REPO}ws/ws.service" >/dev/null 2>&1
+    chmod +x /etc/systemd/system/ws.service
+    chmod +x /usr/bin/ws
+    chmod 644 /usr/bin/tun.conf
+systemctl disable ws
+systemctl stop ws
+systemctl enable ws
+systemctl start ws
+systemctl restart ws
+wget -q -O /usr/local/share/xray/geosite.dat "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat" >/dev/null 2>&1
+wget -q -O /usr/local/share/xray/geoip.dat "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat" >/dev/null 2>&1
+wget -O /usr/sbin/ftvpn "${REPO}ws/ftvpn" >/dev/null 2>&1
+chmod +x /usr/sbin/ftvpn
+iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
+iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
+iptables -A FORWARD -m string --string "find_node" --algo bm -j DROP
+iptables -A FORWARD -m string --algo bm --string "BitTorrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -A FORWARD -m string --algo bm --string "peer_id=" -j DROP
+iptables -A FORWARD -m string --algo bm --string ".torrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -A FORWARD -m string --algo bm --string "torrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "announce" -j DROP
+iptables -A FORWARD -m string --algo bm --string "info_hash" -j DROP
+iptables-save > /etc/iptables.up.rules
+iptables-restore -t < /etc/iptables.up.rules
+netfilter-persistent save
+netfilter-persistent reload
+
+# remove unnecessary files
+cd
+apt autoclean -y >/dev/null 2>&1
+apt autoremove -y >/dev/null 2>&1
+print_success "ePro WebSocket Proxy"
 }
 
 function install_all() {
@@ -489,26 +511,21 @@ function install_all() {
 }
 
 function finish(){
-    USRSC=$(curl -sS https://raw.githubusercontent.com/effatastore/ijin/ipsc/ip | grep $MYIP | awk '{print $2}')
-    EXPSC=$(curl -sS https://raw.githubusercontent.com/effatastore/ijin/ipsc/ip | grep $MYIP | awk '{print $3}')
-    TIMEZONE=$(printf '%(%H:%M:%S)T')
     TEXT="
-<code>────────────────────</code>
-<b>⚠️AUTOSCRIPT PREMIUM⚠️</b>
-<code>────────────────────</code>
-<code>Owner  : </code><code>$USRSC</code>
-<code>Domain : </code><code>$domain</code>
-<code>Date   : </code><code>$TIME</code>
-<code>Time   : </code><code>$TIMEZONE</code>
-<code>Ip vps : </code><code>$MYIP</code>
-<code>Exp Sc : </code><code>$EXPSC</code>
-<code>────────────────────</code>
-<i>Automatic Notification from</i>
-<i>Github RVPN</i> 
-"'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ🐳","url":"https://t.me/CRSe7en2nd"},{"text":"ɪɴꜱᴛᴀʟʟ🐬","url":"https://t.me/rstorx/1"}]]}'
+<u>🌀INFO INSTALL SC🌀</u>
+<code>TIME      : </code><code>${TIME}</code>
+<code>IPVPS     : </code><code>${MYIP}</code>
+<code>DOMAIN    : </code><code>${domain}</code>
+<code>ISP       : </code><code>${ISP}</code>
+<code>LOKASI    : </code><code>${CITY}</code>
+<code>USER      : </code><code>${NAMES}</code>
+<code>RAM       : </code><code>${RAMMS}MB</code>
+<code>LINUX     : </code><code>${OS}</code>
+🔰@ARI_VPN_STORE
+"
     curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
     cp /etc/openvpn/*.ovpn /var/www/html/
-    # sed -i "s/xxx/${domain}/g" /var/www/html/index.html
+    # > sed -i "s/xxx/${domain}/g" /var/www/html/index.html
     sed -i "s/xxx/${domain}/g" /etc/haproxy/haproxy.cfg
     sed -i "s/xxx/${MYIP}/g" /etc/squid/squid.conf
     chown -R www-data:www-data /etc/msmtprc
@@ -516,8 +533,6 @@ function finish(){
 
     # > Bersihkan History
     alias bash2="bash --init-file <(echo '. ~/.bashrc; unset HISTFILE')"
-    clear
-    LOGO 
     clear
     echo "    ┌─────────────────────────────────────────────────────┐"
     echo "    │       >>> Service & Port                            │"
@@ -527,9 +542,9 @@ function finish(){
     echo "    │   - Dropbear Websocket      : 443, 109              │"
     echo "    │   - SSH Websocket SSL       : 443                   │"
     echo "    │   - SSH Websocket           : 80                    │"
-    echo "    │   - OpenVPN SSL             : 1194                   │"
+    echo "    │   - OpenVPN SSL             : 1194                  │"
     echo "    │   - OpenVPN Websocket SSL   : 443                   │"
-    echo "    │   - OpenVPN TCP             : 1194             │"
+    echo "    │   - OpenVPN TCP             : 1194                  │"
     echo "    │   - OpenVPN UDP             : 2200                  │"
     echo "    │   - Nginx Webserver         : 443, 80, 81           │"
     echo "    │   - Haproxy Loadbalancer    : 443, 80               │"
@@ -549,8 +564,9 @@ function finish(){
     echo "    │                                                     │"
     echo "    │      >>> Server Information & Other Features        │"
     echo "    │   - Timezone                : Asia/Jakarta (GMT +7) │"
-    echo "    │   - Autoreboot On           : $AUTOREB:00 $TIME_DATE GMT +7        │"
-    echo "    │   - Auto Delete Expired Account                     │"
+    echo "    │   - Autoreboot On    : $AUTOREB:00 $TIME_DATE GMT +7│"
+    echo "    │   - Auto Delete Expired Account  : per 23:30        │"
+    echo "    │   - FAuto Clear Log.   : Per 30 Menit               │"
     echo "    │   - Fully automatic script                          │"
     echo "    │   - VPS settings                                    │"
     echo "    │   - Admin Control                                   │"
@@ -570,7 +586,7 @@ echo ""
 
 }
 cd /tmp
-KYTPROJECT
+RIZKIHDYTPROJECT
 first_setup
 dir_xray
 add_domain
