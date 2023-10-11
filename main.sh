@@ -295,7 +295,7 @@ if [ "$BASH" ]; then
     fi
 fi
 mesg n || true
-uwu
+menu
 EOF
 
 chmod 644 /root/.profile
