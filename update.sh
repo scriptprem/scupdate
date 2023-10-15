@@ -23,7 +23,7 @@ echo -e "
  ───│    $Green┌─┐┬ ┬┌┬┐┌─┐┌─┐┌─┐┬─┐┬┌─┐┌┬┐  ┬  ┬┌┬┐┌─┐$NC   │───
  ───│    $Green├─┤│ │ │ │ │└─┐│  ├┬┘│├─┘ │   │  │ │ ├┤ $NC   │───
  ───│    $Green┴ ┴└─┘ ┴ └─┘└─┘└─┘┴└─┴┴   ┴   ┴─┘┴ ┴ └─┘$NC   │───
-    │    ${YELLOW}Copyright${FONT} (C)$GRAY https://github.com/rizkyckj$NC  │
+    │    ${YELLOW}Copyright${FONT} (C)$GRAY https://github.com/scriptprem$NC│
     └───────────────────────────────────────────────┘
          ${RED}Autoscript xray vpn lite (multi port)${FONT}    
 ${RED}Make sure the internet is smooth when installing the script${FONT}
