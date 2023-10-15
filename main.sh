@@ -28,8 +28,8 @@ TIME=$(date +'%Y-%m-%d %H:%M:%S')
 RAMMS=$(free -m | awk 'NR==2 {print $2}')
 KEY="6404993567:AAFSJpLEuKHmEmg4MfoD0qME9Dh4Ijz6Ock"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
-REPO="https://raw.githubusercontent.com/MASFUAD12/scupdate/main/"
-CDNF="https://raw.githubusercontent.com/MASFUAD12/scupdate/main"
+REPO="https://raw.githubusercontent.com/scriptprem/scupdate/main/"
+CDNF="https://raw.githubusercontent.com/scriptprem/scupdate/main"
 APT="apt-get -y install "
 domain=$(cat /root/domain)
 start=$(date +%s)
